@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 use kartik\date\DatePicker;
-use kartik\datecontrol\DateControl;
+// use kartik\datecontrol\DateControl;
 
 ?>
 
@@ -18,17 +18,14 @@ use kartik\datecontrol\DateControl;
 
     <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?> 
 
-    <?=  $form->field($model,'date')->widget(DateControl::className(),
-    [
-        // 'displayFormat' => 'dd.mm.yyyy',
-        'ajaxConversion' => true,
-        'widgetOptions' => [
-            'pluginOptions' => [
-                'autoclose' => true,
-                'todayHighlight' => true,
-                'language' => 'ru'
-            ]
-        ]
+    <?php echo $form->field($model, 'date')->widget(DatePicker::classname(), [
+    'options' => ['placeholder' => 'Ввод даты...'],
+    'pluginOptions' => [
+        'autoclose'=>true,
+        'format' => 'dd.mm.yyyy',
+       'todayHighlight' => true,
+        // 'todayBtn' => true,
+           ]
     ])?>
 
      <?= $form->field($model, 'active')->checkbox([ 'value' => '1', 'checked ' => true])?>

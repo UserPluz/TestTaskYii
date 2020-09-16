@@ -33,8 +33,8 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['name','content'],'required'],
             [['name','content'],'string'],
-            // ['date', 'date', 'format' => 'php:Y-m-d'],
-            ['date','required'],
+            ['date', 'date', 'format' => 'php:d.m.Y'],
+            [['date'], 'default', 'value' => date("Y-m-d")],
             [['name'], 'string', 'max' => 255],
             [['active'],'boolean'],
         ];
@@ -52,5 +52,27 @@ class Post extends \yii\db\ActiveRecord
             'date' => 'Дата',
             'active' => 'Отображать на главной странице'
         ];
+    }
+
+    public function afterFind() {
+        parent::afterFind ();
+        $this->date = Yii::$app->formatter->asDate($this->date);
+    }
+
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) 
+        {
+           
+             if($this->date == date("Y-m-d"))
+             {
+                 return true;
+             }
+
+             $this->date = Yii::$app->formatter->asDate($_POST['Post']['date'], 'php:Y-m-d');
+             return true;
+        }
+        return false;
+       
     }
 }
