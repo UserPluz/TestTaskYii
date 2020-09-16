@@ -67,7 +67,7 @@ class PostController extends Controller
         $model = new Post();
         //Yii::$app->request->post() - возвращает данные из формы 
         //$model->load() - автоматически подставляет значение из формы в модель
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(true,['name','content','date','active'])) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\PostSearch */
@@ -37,7 +38,14 @@ $this->registerCss(".addBtn { margin-right: 10px; }");
             ],
             [
                 'header' => 'Заголовок',
-                'attribute' => 'name'
+                'attribute' => 'name',
+                //значение будет отображено как есть
+                'format' => 'raw',
+                'value' => function($model)
+                {
+                    return Html::a("{$model->name}",['update', 'id' => $model->id]);
+                }
+                
             ],
             [
                 'header' => 'Содержание',
@@ -48,6 +56,22 @@ $this->registerCss(".addBtn { margin-right: 10px; }");
                 'header' => 'Дата',
                 'attribute' => 'date',
                 'format' =>  ['date', 'dd.MM.Y'],
+            ],
+            [
+                'header' => '',
+                'attribute' => 'active',
+            ],
+            [
+                'header' => 'url',
+                'format' => 'raw',
+                'value' => function($model)
+                {
+                    if($model->active == '1')
+                    {
+                    return Html::a("blog-demoyii/news/{$model->id}",Url::to("/news/{$model->id}"));
+                    }
+                    return null;
+                }
             ],
 
             

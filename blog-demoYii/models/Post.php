@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 
+use kartik\datecontrol\Module;
+
 /**
  * This is the model class for table "post".
  *
@@ -14,6 +16,7 @@ use Yii;
  */
 class Post extends \yii\db\ActiveRecord
 {
+    // public $active;
     /**
      * {@inheritdoc}
      */
@@ -30,9 +33,10 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['name','content'],'required'],
             [['name','content'],'string'],
-            [['date'],'date','format'=> 'php:Y-m-d'],
-            [['date'],'default','value' => date('Y-m-d')],
-            [['name'], 'string', 'max' => 255]
+            // ['date', 'date', 'format' => 'php:Y-m-d'],
+            ['date','required'],
+            [['name'], 'string', 'max' => 255],
+            [['active'],'boolean'],
         ];
     }
 
@@ -46,6 +50,7 @@ class Post extends \yii\db\ActiveRecord
             'name' => 'Загловок',
             'content' => 'Содержание',
             'date' => 'Дата',
+            'active' => 'Отображать на главной странице'
         ];
     }
 }

@@ -12,7 +12,9 @@ use yii\filters\VerbFilter;
 
 use yii\data\Pagination;
 use app\models\Post;
+use app\models\PostSearch;
 
+use \yii\db\Query;
 
 class SiteController extends Controller
 {
@@ -40,6 +42,7 @@ class SiteController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+
         ];
     }
 
@@ -69,21 +72,38 @@ class SiteController extends Controller
         //строит запрос к БД и извлекает все данные из таблицы post
         $query = Post::find();
 
-       
+        $query = $query->select(['id','name', 'content','date'])
+        ->from('post')
+        ->where(['active' => '1'])
+        ->orderBy('date');
+        
+        
         $pagination = new Pagination([
             'defaultPageSize' => 5,
             'totalCount' => $query->count()
         ]);
-
-        $posts = $query->orderBy('date')
-            ->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
+        
+        $posts = $query
+        ->offset($pagination->offset)
+        ->limit($pagination->limit)
+        ->all();
 
             return $this->render('index', [
                 'posts' => $posts,
                 'pagination' => $pagination,
             ]);
+    }
+
+    public function actionNews($id)
+    {
+        $post = Post::findOne($id);
+        if($post->active)
+        {
+           return $this->render('news',['post' => $post]);
+        }
+        
+        throw new \yii\web\NotFoundHttpException();
+    
     }
 
     /**

@@ -1,0 +1,35 @@
+.mr
+{
+    margin-left: 10px;
+    
+}
+.post
+{
+    border: 1px solid rgba(152 204 152 / 94%);
+    border-width: 10px;
+    padding-bottom: 10px;
+}
+
+.post:hover
+{
+    background-color:  rgb(127, 202, 127);
+}
+
+.post-title
+{
+   
+}
+
+.post-content
+{
+   
+}
+
+.post-date
+{
+    
+}
+.post-show-link
+{
+   
+}

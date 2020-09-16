@@ -18,7 +18,8 @@ class PostSearch extends Post
     {
         return [
             [['id'], 'integer'],
-            [['name', 'content', 'date'], 'safe'],
+            [['name', 'content', 'date',], 'safe'],
+            [['active'], 'boolean'],
         ];
     }
 

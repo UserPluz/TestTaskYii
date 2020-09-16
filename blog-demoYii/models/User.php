@@ -52,6 +52,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
         return null;
     }
+
     public function setIsAdmin()
     {
        
@@ -59,7 +60,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 
     public function getIsAdmin()
     {
-        
         return $this->isAdmin;
     }
     /**

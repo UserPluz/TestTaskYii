@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+// require __DIR__ . '/../vendor/autoload.php';
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Post */

@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\LinkPager;
 use yii\i18n\Formatter;
+use yii\helpers\Url;
 
 $this->title = 'Главная страница';
 
@@ -16,10 +17,11 @@ $this->title = 'Главная страница';
                 <p>Список новостей пуст</p>
             <?php else: ?>
                 <?php foreach ($posts as $post): ?>
-                    <div>
-                        <h2> <?= Html::encode("{$post->name}") ?> </h2>
-                        <h5> <?= Html::encode("{$post->content}") ?> </h5>
-                        <p> Дата: <?= Yii::$app->formatter->asDate($post->date,'dd.MM.yyyy') ?> </p>
+                    <div class="post">
+                        <h2 class="post-title mr"> <?= Html::encode("{$post->name}") ?> </h2>
+                        <h5 class="post-content mr"> <?= Html::encode("{$post->content}") ?> </h5>
+                        <p class="post-date mr"> Дата: <?= Yii::$app->formatter->asDate($post->date,'dd.MM.yyyy') ?> </p>
+                        <a class="post-show-link mr" href="<?= Url::to("/news/{$post->id}")?>">Перейти</a>
                     </div>
                     <hr>
                 <?php endforeach; ?>
