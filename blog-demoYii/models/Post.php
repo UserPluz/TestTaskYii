@@ -33,7 +33,7 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['name','content'],'required'],
             [['name','content'],'string'],
-            ['date', 'date', 'format' => 'php:d.m.Y'],
+            ['date', 'date', 'format' => 'dd.mm.yyyy'],
             [['date'], 'default', 'value' => date("Y-m-d")],
             [['name'], 'string', 'max' => 255],
             [['active'],'boolean'],
