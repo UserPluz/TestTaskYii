@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 
+Html::encode('HI');
 
 $this->title = $post->name;
 \yii\web\YiiAsset::register($this);
@@ -15,6 +16,7 @@ $this->title = $post->name;
     <div>
     <h5> <?= Html::encode("{$post->content}") ?> </h5>
     <p> Дата: <?= Yii::$app->formatter->asDate($post->date,'dd.MM.yyyy') ?> </p>
+
     </div>
 
     

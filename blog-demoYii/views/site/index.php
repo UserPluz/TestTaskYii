@@ -21,7 +21,7 @@ $this->title = 'Главная страница';
                         <h2 class="post-title mr"> <?= Html::encode("{$post->name}") ?> </h2>
                         <h5 class="post-content mr"> <?= Html::encode("{$post->content}") ?> </h5>
                         <p class="post-date mr"> Дата: <?= Yii::$app->formatter->asDate($post->date,'dd.MM.yyyy') ?> </p>
-                        <a class="post-show-link mr" href="<?= Url::to("/news/{$post->id}")?>">Перейти</a>
+                        <a class="post-show-link mr" href="<?= Url::to(['/site/news','url' => $post->url])?>">Перейти</a>
                     </div>
                     <hr>
                 <?php endforeach; ?>

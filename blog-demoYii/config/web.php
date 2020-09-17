@@ -59,7 +59,8 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 'site/<page>' => 'site/index',
-                '<action:news>/<id:\d+>' => 'site/<action>',
+                '<action:news>/<url>' => 'site/<action>',
+               
             ],
         ],
 

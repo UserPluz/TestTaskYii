@@ -28,6 +28,8 @@ use kartik\date\DatePicker;
            ]
     ])?>
 
+     <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+
      <?= $form->field($model, 'active')->checkbox([ 'value' => '1', 'checked ' => true])?>
 
  

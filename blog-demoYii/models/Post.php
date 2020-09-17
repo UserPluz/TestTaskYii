@@ -6,6 +6,8 @@ use Yii;
 
 use kartik\datecontrol\Module;
 
+use yii\behaviors\SluggableBehavior;
+
 /**
  * This is the model class for table "post".
  *
@@ -16,6 +18,21 @@ use kartik\datecontrol\Module;
  */
 class Post extends \yii\db\ActiveRecord
 {
+
+
+
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'url',
+                'slugAttribute' => 'url',
+                'ensureUnique' => true,
+            ],
+        ];
+    }
     // public $active;
     /**
      * {@inheritdoc}
@@ -33,10 +50,12 @@ class Post extends \yii\db\ActiveRecord
         return [
             [['name','content'],'required'],
             [['name','content'],'string'],
-            ['date', 'date', 'format' => 'php:d.m.Y'],
+            ['date', 'date', 'format' => 'dd.mm.yyyy'],
             [['date'], 'default', 'value' => date("Y-m-d")],
             [['name'], 'string', 'max' => 255],
             [['active'],'boolean'],
+            [['url'],'string'],
+            [['url'],'required'],
         ];
     }
 
@@ -50,7 +69,8 @@ class Post extends \yii\db\ActiveRecord
             'name' => 'Загловок',
             'content' => 'Содержание',
             'date' => 'Дата',
-            'active' => 'Отображать на главной странице'
+            'active' => 'Отображать на главной странице',
+            'url' => 'url'
         ];
     }
 
@@ -64,12 +84,8 @@ class Post extends \yii\db\ActiveRecord
         if (parent::beforeSave($insert)) 
         {
            
-             if($this->date == date("Y-m-d"))
-             {
-                 return true;
-             }
-
-             $this->date = Yii::$app->formatter->asDate($_POST['Post']['date'], 'php:Y-m-d');
+            $this->date = Yii::$app->formatter->asDate($this->date, date("Y-m-d",strtotime($this->date)));
+           
              return true;
         }
         return false;

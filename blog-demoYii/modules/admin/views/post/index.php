@@ -64,11 +64,12 @@ $this->registerCss(".addBtn { margin-right: 10px; }");
             [
                 'header' => 'url',
                 'format' => 'raw',
+                'attribute' => 'url',
                 'value' => function($model)
                 {
-                    if($model->active == '1')
+                    if($model->active == '1' && $model->url != 'null')
                     {
-                    return Html::a("blog-demoyii/news/{$model->id}",Url::to("/news/{$model->id}"));
+                       return Html::a("Ссылка",Url::to(['/site/news','url' => $model->url]));
                     }
                     return null;
                 }

@@ -72,9 +72,10 @@ class SiteController extends Controller
         //строит запрос к БД и извлекает все данные из таблицы post
         $query = Post::find();
 
-        $query = $query->select(['id','name', 'content','date'])
+        $query = $query->select(['id','name', 'content','date','url'])
         ->from('post')
         ->where(['active' => '1'])
+        ->andWhere(['not', ['url' => 'null']])
         ->orderBy('date');
         
         
@@ -94,13 +95,18 @@ class SiteController extends Controller
             ]);
     }
 
-    public function actionNews($id)
+    public function actionNews($url)
     {
-        $post = Post::findOne($id);
-        if($post->active)
-        {
-           return $this->render('news',['post' => $post]);
-        }
+        $post = Post::find()->where(['url' => $url])->one();
+
+            if($post->active)
+            {
+                
+            return $this->render('news', [
+                'post' => $post
+            ]);
+
+            }
         
         throw new \yii\web\NotFoundHttpException();
     
